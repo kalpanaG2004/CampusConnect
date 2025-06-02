@@ -11,12 +11,10 @@ async def register(user: UserRegister):
     if user_collection.find_one({"email": user.email}):
         raise HTTPException(status_code=400, detail="Email already exists")
     
-    hashed_pwd = hash_password(user.password)
-    user_data = {
-        "username": user.username,
-        "email": user.email,
-        "password": hashed_pwd,
-    }
+    user_data = user.model_dump();
+    user_data["password"] = hash_password(user.password)
+    user_data["role"] = user_data.get("role", "student")
+
     user_collection.insert_one(user_data)
     return {"message": "User registered successfully"}
 
@@ -29,5 +27,12 @@ async def login(user: UserLogin):
     if not verify_password(user.password, db_user["password"]):
         raise HTTPException(status_code=401, detail="Invalid credentials")
 
-    token = create_access_token({"email": db_user["email"]})
-    return {"access_token": token, "token_type": "bearer"}
+    token = create_access_token({
+        "email": db_user["email"],
+        "role": db_user["role"]
+    })
+    return {"access_token": token,
+            "token_type": "bearer",
+            "email": db_user["email"],
+            "role": db_user.get("role", "student")
+            }
