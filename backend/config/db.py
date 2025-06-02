@@ -8,3 +8,4 @@ MONGO_URI = os.getenv("MONGO_URI")
 conn = MongoClient(MONGO_URI)
 db = conn["campusConnect"]
 user_collection = db["users"]
+feedback_collection = db["feedback"]
