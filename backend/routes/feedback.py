@@ -37,6 +37,7 @@ async def submit_feedback(feedback: FeedbackCreate, user=Depends(get_current_use
         "title": feedback.title,
         "comment": feedback.comment,
         "rating": feedback.rating,
+        "category": feedback.category,
         "is_anonymous": feedback.is_anonymous,
         "submitted_at": datetime.utcnow(),
         "user_id": str(user["_id"]),
@@ -62,6 +63,7 @@ async def get_public_feedbacks():
             title=fb["title"],
             comment=fb["comment"],
             rating=fb["rating"],
+            category=fb["category"],
             username=None if fb["is_anonymous"] else fb["username"],
             submitted_at=fb["submitted_at"]
         ))
@@ -79,7 +81,8 @@ def get_my_feedbacks(token: str = Depends(oauth2_scheme)):
             "comment": fb["comment"],
             "rating": fb["rating"],
             "submitted_at": fb["submitted_at"],
-            "is_anonymous": fb["is_anonymous"]
+            "is_anonymous": fb["is_anonymous"],
+            "category": fb["category"]
         })
     
     return {"my_feedbacks": result}

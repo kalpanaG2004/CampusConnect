@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import Optional
+from typing import Optional, Literal
 from datetime import datetime
 
 # Model for submitting feedback (user-facing)
@@ -8,6 +8,7 @@ class FeedbackCreate(BaseModel):
     comment: str = Field(..., min_length=30, max_length=1000)
     rating: int = Field(..., ge=1, le=5)
     is_anonymous: bool = False  # default: not anonymous
+    category: Literal["faculty", "event", "club"]
 
 # Internal model for storing feedback in DB or returning to admin
 class FeedbackInDB(FeedbackCreate):
@@ -21,5 +22,6 @@ class PublicFeedback(BaseModel):
     title: str
     comment: str
     rating: int
+    category: str
     username: Optional[str] = None  # shown only if not anonymous
     submitted_at: datetime
