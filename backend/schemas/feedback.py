@@ -8,7 +8,7 @@ class FeedbackCreate(BaseModel):
     comment: str = Field(..., min_length=30, max_length=1000)
     rating: int = Field(..., ge=1, le=5)
     is_anonymous: bool = False  # default: not anonymous
-    category: Literal["faculty", "event", "club"]
+    # category: Optional[Literal["faculty", "event", "club", "other"]] = None # no longer useful
 
 # Internal model for storing feedback in DB or returning to admin
 class FeedbackInDB(FeedbackCreate):

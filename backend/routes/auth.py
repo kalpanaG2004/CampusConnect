@@ -1,8 +1,9 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 from schemas.user import UserRegister, UserLogin
-from config.db import db, user_collection
+from config.db import user_collection
 from utils.auth import hash_password, verify_password
 from utils.jwt_handler import create_access_token
+from fastapi.security import OAuth2PasswordRequestForm
 
 router = APIRouter()
 
@@ -19,20 +20,21 @@ async def register(user: UserRegister):
     return {"message": "User registered successfully"}
 
 @router.post("/login")
-async def login(user: UserLogin):
-    db_user = user_collection.find_one({"email": user.email})
-    if not db_user:
-        raise HTTPException(status_code=401, detail="Invalid credentials")
-    
-    if not verify_password(user.password, db_user["password"]):
-        raise HTTPException(status_code=401, detail="Invalid credentials")
+async def login(form_data: OAuth2PasswordRequestForm = Depends()):
+    user = user_collection.find_one({"email": form_data.username})
+    if not user:
+        raise HTTPException(status_code=401, detail="Invalid email")
+
+    if not verify_password(form_data.password, user["password"]):
+        raise HTTPException(status_code=401, detail="Invalid password")
+
 
     token = create_access_token({
-        "email": db_user["email"],
-        "role": db_user["role"]
+        "email": user["email"],
+        "role": user.get("role", "student")
     })
     return {"access_token": token,
             "token_type": "bearer",
-            "email": db_user["email"],
-            "role": db_user.get("role", "student")
+            "email": user["email"],
+            "role": user.get("role", "student")
             }

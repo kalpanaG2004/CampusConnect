@@ -1,18 +1,9 @@
-from fastapi import APIRouter, HTTPException, Depends
-from schemas.feedback import FeedbackCreate, FeedbackInDB, PublicFeedback
-from models.feedback import admin_feedback_helper, public_feedback_helper
-from config.db import user_collection, feedback_collection
-from datetime import datetime
-from jose import JWTError, jwt
-from utils.jwt_handler import decode_access_token
-from fastapi.security import OAuth2PasswordBearer
-import os
-from typing import List
+from fastapi import APIRouter, Depends, HTTPException
+from schemas.feedback import FeedbackInDB, PublicFeedback
+from config.db import feedback_collection, user_collection
+from utils.jwt_handler import decode_access_token, oauth2_scheme
 
 router = APIRouter()
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
-SECRET_KEY = os.getenv("SECRET_KEY")
-ALGORITHM = os.getenv("JWT_ALGORITHM", "HS256")
 
 async def get_current_user(token: str = Depends(oauth2_scheme)):
     payload = decode_access_token(token)
@@ -31,27 +22,11 @@ async def admin_only(user=Depends(get_current_user)):
         raise HTTPException(status_code=403, detail="Admin access only")
     return user
 
-@router.post("/submit-feedback")
-async def submit_feedback(feedback: FeedbackCreate, user=Depends(get_current_user)):
-    feedback_data = {
-        "title": feedback.title,
-        "comment": feedback.comment,
-        "rating": feedback.rating,
-        "category": feedback.category,
-        "is_anonymous": feedback.is_anonymous,
-        "submitted_at": datetime.utcnow(),
-        "user_id": str(user["_id"]),
-        "email": user["email"],
-        "username": None if feedback.is_anonymous else user["username"]
-    }
-    feedback_collection.insert_one(feedback_data)
-    return {"message": "Feedback submitted successfully"}
-
 # Admin View Route
 @router.get("/admin/feedbacks", response_model=list[FeedbackInDB])
 async def get_all_feedbacks_admin(user=Depends(admin_only)):
     feedbacks = feedback_collection.find()
-    return [FeedbackInDB(**fb, user_id=fb["user_id"]) for fb in feedbacks]
+    return [FeedbackInDB(**fb) for fb in feedbacks]
 
 # Public View Route
 @router.get("/feedbacks", response_model=list[PublicFeedback])
@@ -72,7 +47,7 @@ async def get_public_feedbacks():
 @router.get("/my-feedbacks")
 def get_my_feedbacks(token: str = Depends(oauth2_scheme)):
     user = decode_access_token(token)
-    feedbacks = feedback_collection.find({"user_email": user.get("email")}) # type: ignore
+    feedbacks = feedback_collection.find({"email": user.get("email")}) # type: ignore
     result = []
     for fb in feedbacks:
         result.append({

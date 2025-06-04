@@ -1,7 +1,8 @@
 from fastapi import FastAPI
-from routes import auth, feedback
+from routes import auth, submit_fb, view_fb
 
 app = FastAPI()
 
 app.include_router(auth.router)
-app.include_router(feedback.router)
+app.include_router(submit_fb.router)
+app.include_router(view_fb.router)
