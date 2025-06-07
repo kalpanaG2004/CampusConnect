@@ -5,7 +5,7 @@ import os
 
 SECRET_KEY = os.getenv("SECRET_KEY", "secret")  # fallback for dev
 ALGORITHM = os.getenv("JWT_ALGORITHM", "HS256")
-EXPIRATION_MINUTES = 60
+EXPIRATION_MINUTES = 60 * 24 * 30
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 

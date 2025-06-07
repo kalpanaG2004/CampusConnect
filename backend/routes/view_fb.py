@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from schemas.feedback import FeedbackInDB, PublicFeedback
 from config.db import feedback_collection, user_collection
 from utils.jwt_handler import decode_access_token, oauth2_scheme
+from bson import ObjectId
 
 router = APIRouter()
 
@@ -44,6 +45,7 @@ async def get_public_feedbacks():
         ))
     return public_feedbacks
 
+# User View Route
 @router.get("/my-feedbacks")
 def get_my_feedbacks(token: str = Depends(oauth2_scheme)):
     user = decode_access_token(token)
@@ -61,3 +63,16 @@ def get_my_feedbacks(token: str = Depends(oauth2_scheme)):
         })
     
     return {"my_feedbacks": result}
+
+# fetching feedback for modification
+@router.get("/feedbacks/{feedback_id}", response_model=FeedbackInDB)
+async def get_feedback_by_id(feedback_id: str, user=Depends(get_current_user)):
+    feedback = feedback_collection.find_one({
+        "_id": ObjectId(feedback_id),
+        "email": user["email"]
+    })
+    
+    if not feedback:
+        raise HTTPException(status_code=404, detail="Feedback not found")
+
+    return FeedbackInDB(**feedback)
