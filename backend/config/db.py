@@ -4,7 +4,7 @@ import os
 
 load_dotenv()
 
-MONGO_URI = os.getenv("MONGO_URI")
+MONGO_URI = os.getenv("MONGODB_URI")
 conn = MongoClient(MONGO_URI)
 db = conn["campusConnect"]
 user_collection = db["users"]
