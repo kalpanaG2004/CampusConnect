@@ -1,22 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException
 from bson import ObjectId
 from schemas.feedback import FeedbackUpdate
-from config.db import feedback_collection, user_collection
-from utils.jwt_handler import decode_access_token, oauth2_scheme
+from config.db import feedback_collection
+from utils.dependencies import get_current_user
 
 router = APIRouter()
-
-# Common Dependency
-async def get_current_user(token: str = Depends(oauth2_scheme)):
-    payload = decode_access_token(token)
-    if not payload:
-        raise HTTPException(status_code=401, detail="Invalid token")
-        
-    user = user_collection.find_one({"email": payload.get("email")})
-    if not user:
-        raise HTTPException(status_code=404, detail="User not found")
-
-    return user
 
 # PATCH route: Edit Feedback
 @router.patch("/feedbacks/{feedback_id}")

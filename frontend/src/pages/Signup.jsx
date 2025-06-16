@@ -159,7 +159,7 @@ function Signup() {
           {formData.role === "admin" && (
             <input
               name="adminCode"
-              type="text"
+              type="password"
               placeholder="Admin Code"
               value={formData.adminCode}
               onChange={handleChange}

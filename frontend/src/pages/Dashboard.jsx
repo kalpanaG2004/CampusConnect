@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import FeedbackForm from '../components/FeedbackForm';
-
-// TODO: Replace alerts with toast notifications (Phase 8)
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -82,6 +81,18 @@ function Dashboard() {
           <FeedbackForm category={selectedCategory} />
         </div>
       )}
+      <div>
+        <Link to="/my-feedbacks" className="bg-blue-400 text-white px-4 py-2 rounded hover:bg-blue-500">
+          View My Submitted Feedbacks
+        </Link>
+
+        {localStorage.getItem("role") === "admin" && (
+          <Link to="/all-feedbacks" className="bg-pink-400 text-white px-4 py-2 rounded hover:bg-pink-500">
+            View All Feedbacks (Admin)
+          </Link>
+        )}
+
+      </div>
     </div>
   );
 }

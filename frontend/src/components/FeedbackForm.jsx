@@ -1,7 +1,5 @@
 import { useState } from 'react';
 
-// TODO: Replace alerts with toast notifications (Phase 8)
-
 function FeedbackForm({ category }) {
     const [formData, setFormData] = useState({
         title: '',

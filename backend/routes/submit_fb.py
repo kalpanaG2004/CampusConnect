@@ -1,24 +1,13 @@
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, Depends
 from schemas.feedback import FeedbackCreate
-from config.db import user_collection, feedback_collection
+from config.db import feedback_collection
 from datetime import datetime
-from utils.jwt_handler import decode_access_token, oauth2_scheme
+from utils.dependencies import get_current_user
 import os
 
 router = APIRouter()
 SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = os.getenv("JWT_ALGORITHM", "HS256")
-
-async def get_current_user(token: str = Depends(oauth2_scheme)):
-    payload = decode_access_token(token)
-    if not payload:
-        raise HTTPException(status_code=401, detail="Invalid token")
-        
-    user = user_collection.find_one({"email": payload.get("email")})
-    if not user:
-        raise HTTPException(status_code=404, detail="User not found")
-
-    return user
 
 def create_feedback_data(feedback: FeedbackCreate, current_user, category: str):
     return {
