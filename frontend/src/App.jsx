@@ -6,7 +6,7 @@ import Dashboard from './pages/Dashboard';
 import NotFound from './pages/NotFound';
 import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
-import PublicFeedbackList from './pages/PublicFeedbackList';
+import PublicFeedbacks from './pages/PublicFeedbacks';
 import MyFeedbacks from './pages/MyFeedbacks';
 import AllFeedbacks from './pages/AllFeedbacks';
 
@@ -16,7 +16,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/feedbacks" element={<PublicFeedbackList />} />
+        <Route path="/feedbacks" element={<PublicFeedbacks />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/dashboard" element={

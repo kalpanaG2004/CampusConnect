@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { formatDateTime } from '../utils/FormatDate';
 
-function PublicFeedbackList() {
+function PublicFeedbacks() {
     const [feedbacks, setFeedbacks] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -54,4 +54,4 @@ function PublicFeedbackList() {
     );
 }
 
-export default PublicFeedbackList;
+export default PublicFeedbacks;
