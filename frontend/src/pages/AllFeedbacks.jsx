@@ -1,27 +1,32 @@
 import { useEffect, useState } from 'react';
 import { formatDateTime } from '../utils/FormatDate';
+import { DeleteButton } from '../components/ActionButtons';
+import { useFeedbackEdit } from '../hooks/useFeedbackEdit';
 
 function AllFeedbacks() {
-  const [feedbacks, setFeedbacks] = useState([]);
-  const [userEmail, setUserEmail] = useState('');
+  const [myFeedbacks, setMyFeedbacks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const token = localStorage.getItem('token');
+
+  const {
+    deleteFeedback,
+  } = useFeedbackEdit(myFeedbacks, setMyFeedbacks);
 
   useEffect(() => {
 
-    setUserEmail(localStorage.getItem('email') || '');
 
     const fetchAllFeedbacks = async () => {
       try {
         const res = await fetch('http://localhost:8000/admin/feedbacks', {
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Authorization': `Bearer ${token}`,
           },
         });
 
         if (!res.ok) throw new Error('Failed to load feedbacks');
 
         const data = await res.json();
-        setFeedbacks(data);
+        setMyFeedbacks(data);
       } catch (err) {
         alert(err.message);
       } finally {
@@ -30,7 +35,7 @@ function AllFeedbacks() {
     };
 
     fetchAllFeedbacks();
-  }, []);
+  }, [token]);
 
   return (
     <div className="max-w-5xl mx-auto p-6">
@@ -38,11 +43,11 @@ function AllFeedbacks() {
 
       {loading ? (
         <p className="text-center">Loading feedbacks...</p>
-      ) : feedbacks.length === 0 ? (
+      ) : myFeedbacks.length === 0 ? (
         <p className="text-center">No feedbacks found.</p>
       ) : (
         <div className="space-y-6">
-          {feedbacks.map((fb) => (
+          {myFeedbacks.map((fb) => (
             <div
               key={fb.id}
               className="border rounded-md p-4 shadow hover:shadow-lg transition"
@@ -62,13 +67,8 @@ function AllFeedbacks() {
                 {fb.username && <> · by <strong>{fb.username}</strong></>}
                 {fb.is_anonymous && <span className="italic ml-2">(Anonymous)</span>}
               </div>
-
-              <div className="flex gap-3">
-                {fb.email === userEmail && (
-                  <button className="px-4 py-1 bg-yellow-400 rounded text-white hover:bg-yellow-500">
-                    Edit
-                  </button>
-                )}
+              <div>
+                <DeleteButton onClick={() => deleteFeedback(fb.id)} />
               </div>
             </div>
           ))}
