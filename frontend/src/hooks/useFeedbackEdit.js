@@ -42,9 +42,18 @@ export function useFeedbackEdit(myFeedbacks, setMyFeedbacks) {
       });
 
       const updatedData = await updatedRes.json();
+      const categoryToPreserve = editedFeedbacks.category ?? myFeedbacks.find(fb => fb.id === editingId)?.category;
+
+      // Stripping username to maintain original MyFeedbacks behavior
+      // and preserving disappearing category
+      const sanitizedData = {
+        ...updatedData,
+        category: updatedData.category || categoryToPreserve
+      };
+      delete sanitizedData.username;
 
       setMyFeedbacks(prev =>
-        prev.map(fb => fb.id === editingId ? updatedData : fb)
+        prev.map(fb => fb.id === editingId ? sanitizedData : fb)
       );
 
       cancelEditing();
