@@ -12,7 +12,7 @@ export function useFeedbackEdit(myFeedbacks, setMyFeedbacks) {
 
   const cancelEditing = () => {
     setEditingId(null);
-    setEditedFeedbacks({});
+    setEditedFeedbacks(null);
   };
 
   const updateField = (field, value) => {
@@ -35,8 +35,16 @@ export function useFeedbackEdit(myFeedbacks, setMyFeedbacks) {
 
       if (!res.ok) throw new Error('Failed to update feedback');
 
-      setMyFeedbacks((prev) =>
-        prev.map((fb) => (fb.id === editingId ? { ...fb, ...editedFeedbacks } : fb))
+      const updatedRes = await fetch(`http://localhost:8000/feedbacks/${editingId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const updatedData = await updatedRes.json();
+
+      setMyFeedbacks(prev =>
+        prev.map(fb => fb.id === editingId ? updatedData : fb)
       );
 
       cancelEditing();

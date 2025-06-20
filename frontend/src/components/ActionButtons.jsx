@@ -10,7 +10,7 @@ function EditButton({ onClick }) {
 }
 
 
-function SaveButton({ onClick }) {
+function SaveButton() {
     return (
         <button
             type="submit"

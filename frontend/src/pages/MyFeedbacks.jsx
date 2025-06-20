@@ -58,7 +58,6 @@ function MyFeedbacks() {
                 onEditStart={startEditing}
                 onCancel={cancelEditing}
                 onChange={updateField}
-                onSave={saveChanges}
                 onDelete={deleteFeedback}
                 saveChanges={saveChanges}
                 cancelEditing={cancelEditing}

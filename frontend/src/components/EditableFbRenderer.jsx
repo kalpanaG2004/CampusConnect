@@ -10,7 +10,6 @@ function EditableFbRenderer({
     onEditStart,
     onCancel,
     onChange,
-    onSave,
     onDelete,
     saveChanges,
     cancelEditing,
@@ -22,39 +21,51 @@ function EditableFbRenderer({
     ) : (
         <div className="space-y-6">
             {data.map((fb) => (
-                <div key={fb.id} className="border rounded-md p-4 shadow-sm hover:shadow-md transition">
+                <div key={fb.id || fb._id} className="border rounded-md p-4 shadow-sm hover:shadow-md transition">
                     {editable && editingId === fb.id ? (
-                        <form
-                            onSubmit={(e) => {
-                                e.preventDefault();
-                                saveChanges();
-                            }}
-                            onKeyDown={(e) => {
-                                if (e.key === 'Escape') cancelEditing();
-                            }}
-                        >
-                            <input
-                                type="text"
-                                value={editedFeedback.title}
-                                onChange={(e) => onChange('title', e.target.value)}
-                                className="block w-full mb-2 border rounded p-2"
-                            />
-                            <textarea
-                                value={editedFeedback.comment}
-                                onChange={(e) => onChange('comment', e.target.value)}
-                                className="block w-full mb-2 border rounded p-2"
-                            />
-                            <input
-                                type="number"
-                                value={editedFeedback.rating}
-                                onChange={(e) => onChange('rating', parseInt(e.target.value))}
-                                className="block w-full mb-2 border rounded p-2"
-                            />
-                            <div className="flex gap-2">
-                                <SaveButton onClick={onSave} />
-                                <CancelButton onClick={onCancel} />
-                            </div>
-                        </form>
+                        editedFeedback ? (
+                            <form
+                                onSubmit={(e) => {
+                                    e.preventDefault();
+                                    saveChanges();
+                                }}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Escape') cancelEditing();
+                                }}
+                            >
+                                <input
+                                    type="text"
+                                    value={editedFeedback.title}
+                                    onChange={(e) => onChange('title', e.target.value)}
+                                    className="block w-full mb-2 border rounded p-2"
+                                />
+                                <textarea
+                                    value={editedFeedback.comment}
+                                    onChange={(e) => onChange('comment', e.target.value)}
+                                    className="block w-full mb-2 border rounded p-2"
+                                />
+                                <input
+                                    type="number"
+                                    value={editedFeedback.rating ?? ''}
+                                    onChange={(e) => onChange('rating', parseInt(e.target.value))}
+                                    className="block w-full mb-2 border rounded p-2"
+                                />
+                                <div className="mb-2">
+                                    <label className="text-gray-700 text-sm">
+                                        <input
+                                            type="checkbox"
+                                            checked={editedFeedback.is_anonymous || false}
+                                            onChange={(e) => onChange('is_anonymous', e.target.checked)}
+                                        />
+                                        Submit anonymously
+                                    </label>
+                                </div>
+                                <div className="flex gap-2">
+                                    <SaveButton />
+                                    <CancelButton onClick={onCancel} />
+                                </div>
+                            </form>
+                        ) : null
                     ) : (
                         <>
                             <div className="flex justify-between mb-1">
@@ -65,7 +76,7 @@ function EditableFbRenderer({
                             <div className="text-sm text-gray-600">
                                 ⭐ {fb.rating}/5 · {formatDateTime(fb.submitted_at)}
                                 {fb.is_anonymous && <span className="italic ml-2">(Anonymous)</span>}
-                                {fb.username && <> · by <strong>{fb.username}</strong></>}
+                                {!fb.is_anonymous && fb.username && <> · by <strong>{fb.username}</strong></>}
                             </div>
                             <div className="flex gap-2 mt-2">
                                 {editable && <EditButton onClick={() => onEditStart(fb.id, fb)} />}
