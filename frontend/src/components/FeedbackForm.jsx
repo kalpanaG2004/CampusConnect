@@ -114,6 +114,7 @@ function FeedbackForm({ category }) {
                     checked={formData.is_anonymous}
                     onChange={handleChange}
                     id="anonCheck"
+                    className="h-4 w-4 text-blue-600 rounded"
                 />
                 <label htmlFor="anonCheck" className="text-gray-700 text-sm">
                     Submit anonymously

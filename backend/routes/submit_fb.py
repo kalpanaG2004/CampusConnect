@@ -40,6 +40,12 @@ async def submit_faculty_feedback(feedback: FeedbackCreate, current_user=Depends
     feedback_collection.insert_one(feedback_data)
     return {"message": "Feedback submitted successfully"}
 
+@router.post("/feedback/infrastructure")
+async def submit_infrastructure_feedback(feedback: FeedbackCreate, current_user=Depends(get_current_user)):
+    feedback_data = create_feedback_data(feedback, current_user, category="infrastructure")
+    feedback_collection.insert_one(feedback_data)
+    return {"message": "Feedback submitted successfully"}
+
 @router.post("/feedback/other")
 async def submit_other_feedback(feedback: FeedbackCreate, current_user=Depends(get_current_user)):
     feedback_data = create_feedback_data(feedback, current_user, category="other")

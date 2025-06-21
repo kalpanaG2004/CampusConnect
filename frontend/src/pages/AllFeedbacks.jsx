@@ -40,7 +40,7 @@ function AllFeedbacks() {
 
   return (
     <div className="max-w-5xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6 text-center">All Submitted Feedbacks (Admin View) 🛠️</h1>
+      <h1 className="text-3xl font-bold mb-6 text-center">All Feedbacks (Admin View) 🛠️</h1>
 
       <SearchAndFilter feedbacks={myFeedbacks} onFilter={setFiltered} />
 

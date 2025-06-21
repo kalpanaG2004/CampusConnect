@@ -1,4 +1,4 @@
-import { formatDateTime } from '../utils/FormatDate';
+import { formatDate } from '../utils/FormatDate';
 
 function FeedbackListRenderer({ loading, data = [] }) {
     return loading ? (
@@ -18,7 +18,7 @@ function FeedbackListRenderer({ loading, data = [] }) {
                     </div>
                     <p className="text-gray-700 mb-2">{fb.comment}</p>
                     <div className="text-sm text-gray-600">
-                        ⭐ {fb.rating}/5 · Submitted {formatDateTime(fb.submitted_at)}
+                        ⭐ {fb.rating}/5 · Submitted {formatDate(fb.submitted_at)}
                         {fb.username && <> · by <strong>{fb.username}</strong></>}
                     </div>
                 </div>

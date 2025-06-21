@@ -6,7 +6,7 @@ function Home() {
       <h1 className="text-4xl font-bold mb-4">Welcome to Campus Connect 🎓</h1>
       <p className="text-gray-600">Your feedback, your voice, your impact.</p>
       <Link to="/feedbacks" className="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-800">
-        View Public Feedbacks
+        View Feedbacks
       </Link>
     </div>
   );

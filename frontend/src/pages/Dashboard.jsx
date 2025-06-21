@@ -67,6 +67,12 @@ function Dashboard() {
             🎭 Club Feedback
           </button>
           <button
+            onClick={() => setSelectedCategory("infrastructure")}
+            className="bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-2 px-4 rounded"
+          >
+            🏢 Infrastructure Feedback
+          </button>
+          <button
             onClick={() => setSelectedCategory("other")}
             className="bg-purple-500 hover:bg-purple-600 text-white font-medium py-2 px-4 rounded"
           >
@@ -83,12 +89,12 @@ function Dashboard() {
       )}
       <div>
         <Link to="/my-feedbacks" className="bg-blue-400 text-white px-4 py-2 rounded hover:bg-blue-500">
-          View My Submitted Feedbacks
+          My Feedbacks
         </Link>
 
         {localStorage.getItem("role") === "admin" && (
           <Link to="/all-feedbacks" className="bg-pink-400 text-white px-4 py-2 rounded hover:bg-pink-500">
-            View All Feedbacks (Admin)
+            All Feedbacks (Admin View)
           </Link>
         )}
 

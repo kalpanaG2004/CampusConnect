@@ -1,4 +1,4 @@
-import { formatDateTime } from '../utils/FormatDate';
+import { formatDate } from '../utils/FormatDate';
 import { EditButton, SaveButton, CancelButton, DeleteButton } from './ActionButtons';
 
 function EditableFbRenderer({
@@ -51,13 +51,14 @@ function EditableFbRenderer({
                                     className="block w-full mb-2 border rounded p-2"
                                 />
                                 <div className="mb-2">
-                                    <label className="text-gray-700 text-sm">
+                                    <label className="flex items-center space-x-2 text-gray-700 text-sm">
                                         <input
                                             type="checkbox"
                                             checked={editedFeedback.is_anonymous || false}
                                             onChange={(e) => onChange('is_anonymous', e.target.checked)}
+                                            className="h-4 w-4 text-blue-600 rounded"
                                         />
-                                        Submit anonymously
+                                        <span> Submit anonymously </span>
                                     </label>
                                 </div>
                                 <div className="flex gap-2">
@@ -74,7 +75,7 @@ function EditableFbRenderer({
                             </div>
                             <p className="text-gray-700 mb-2">{fb.comment}</p>
                             <div className="text-sm text-gray-600">
-                                ⭐ {fb.rating}/5 · {formatDateTime(fb.submitted_at)}
+                                ⭐ {fb.rating}/5 · {formatDate(fb.submitted_at)}
                                 {fb.is_anonymous && <span className="italic ml-2">(Anonymous)</span>}
                                 {!fb.is_anonymous && fb.username && <> · by <strong>{fb.username}</strong></>}
                             </div>

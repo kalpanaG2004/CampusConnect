@@ -4,7 +4,7 @@ export default function SearchAndFilter({feedbacks = [], onFilter}) {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('All');
 
-    const CATEGORIES = ['All', 'event', 'club', 'faculty'];
+    const CATEGORIES = ['All', 'event', 'club', 'faculty', 'infrastructure'];
 
     useEffect(() => {
         let results = feedbacks;
