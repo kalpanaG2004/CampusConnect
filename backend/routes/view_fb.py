@@ -11,13 +11,13 @@ router = APIRouter()
 # Admin View Route
 @router.get("/admin/feedbacks", response_model=list[FeedbackInDB])
 async def get_all_feedbacks_admin(user=Depends(admin_only)):
-    feedbacks = feedback_collection.find()
+    feedbacks = feedback_collection.find().sort("submitted_at", -1)
     return [FeedbackInDB(**serialize_fb(fb)) for fb in feedbacks]
 
 # Public View Route
 @router.get("/feedbacks", response_model=list[PublicFeedback])
 async def get_public_feedbacks():
-    feedbacks = feedback_collection.find()
+    feedbacks = feedback_collection.find().sort("submitted_at", -1)
     public_feedbacks = []
     for fb in feedbacks:
         public_feedbacks.append(PublicFeedback(
@@ -34,7 +34,7 @@ async def get_public_feedbacks():
 @router.get("/my-feedbacks")
 def get_my_feedbacks(token: str = Depends(oauth2_scheme)):
     user = decode_access_token(token)
-    feedbacks = feedback_collection.find({"email": user.get("email")}) # type: ignore
+    feedbacks = feedback_collection.find({"email": user.get("email")}).sort("submitted_at", -1) # type: ignore
     result = []
     for fb in feedbacks:
         result.append({

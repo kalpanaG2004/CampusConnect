@@ -1,4 +1,4 @@
-export function formatDateTime(dateString) {
+export function formatDate(dateString) {
   const date = new Date(dateString);
 
   const formattedDate = date.toLocaleDateString('en-GB', {
@@ -7,10 +7,5 @@ export function formatDateTime(dateString) {
     year: 'numeric',
   });
 
-  const formattedTime = date.toLocaleTimeString([], {
-    hour: '2-digit',
-    minute: '2-digit',
-  });
-
-  return `${formattedDate} ${formattedTime}`;
+  return `${formattedDate}`;
 }
