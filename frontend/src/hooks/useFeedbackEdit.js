@@ -12,7 +12,7 @@ export function useFeedbackEdit(myFeedbacks, setMyFeedbacks) {
 
   const cancelEditing = () => {
     setEditingId(null);
-    setEditedFeedbacks({});
+    setEditedFeedbacks(null);
   };
 
   const updateField = (field, value) => {
@@ -35,8 +35,25 @@ export function useFeedbackEdit(myFeedbacks, setMyFeedbacks) {
 
       if (!res.ok) throw new Error('Failed to update feedback');
 
-      setMyFeedbacks((prev) =>
-        prev.map((fb) => (fb.id === editingId ? { ...fb, ...editedFeedbacks } : fb))
+      const updatedRes = await fetch(`http://localhost:8000/feedbacks/${editingId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const updatedData = await updatedRes.json();
+      const categoryToPreserve = editedFeedbacks.category ?? myFeedbacks.find(fb => fb.id === editingId)?.category;
+
+      // Stripping username to maintain original MyFeedbacks behavior
+      // and preserving disappearing category
+      const sanitizedData = {
+        ...updatedData,
+        category: updatedData.category || categoryToPreserve
+      };
+      delete sanitizedData.username;
+
+      setMyFeedbacks(prev =>
+        prev.map(fb => fb.id === editingId ? sanitizedData : fb)
       );
 
       cancelEditing();

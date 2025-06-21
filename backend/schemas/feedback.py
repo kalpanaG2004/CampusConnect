@@ -32,3 +32,4 @@ class FeedbackUpdate(BaseModel):
     comment: Optional[str] = None
     rating: Optional[int] = Field(None, ge=1, le=5)
     category: Optional[str] = None
+    is_anonymous: Optional[bool]

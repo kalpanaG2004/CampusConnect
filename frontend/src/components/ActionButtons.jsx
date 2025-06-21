@@ -10,10 +10,10 @@ function EditButton({ onClick }) {
 }
 
 
-function SaveButton({ onClick }) {
+function SaveButton() {
     return (
         <button
-            onClick={onClick}
+            type="submit"
             className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600"
         >
             Save
