@@ -55,3 +55,22 @@ def get_feedback_highlights():
     ]
 
     return {"highlights": simplified_highlights}
+
+@router.get("/analytics/teasers")
+def get_teasers():
+    categories = ['faculty', 'event', 'club', 'infrastructure', 'other']
+    teasers = []
+
+    for category in categories:
+        fb = list(feedback_collection.aggregate([
+            {"$match": {"category": category}},
+            {"$sample": {"size": 1}}
+            ]))
+        if fb:
+            teasers.append({
+                "title": fb[0].get("title", "No Title"),
+                "comment": fb[0].get("comment", "No Comment"),
+                "category": category
+            })
+
+    return {"teasers": teasers}

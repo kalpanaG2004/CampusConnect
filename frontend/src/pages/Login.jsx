@@ -21,10 +21,7 @@ function Login() {
     e.preventDefault();
 
     // Basic frontend validation
-    if (!formData.email || !formData.password) {
-      alert("Please fill in all fields");
-      return;
-    }
+    if (!formData.email || !formData.password) return alert("Please fill in all fields");
 
     try {
       setLoading(true);
@@ -65,36 +62,33 @@ function Login() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-16 p-6 bg-white rounded shadow">
-      <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          className="w-full p-2 border rounded"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          className="w-full p-2 border rounded"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
-          disabled={loading}
-        >
-          {loading ? "Logging in..." : "Login"}
-        </button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+      <input
+        type="email"
+        name="email"
+        placeholder="Email"
+        value={formData.email}
+        onChange={handleChange}
+        className="p-2 rounded border"
+        required
+      />
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        value={formData.password}
+        onChange={handleChange}
+        className="p-2 rounded border"
+        required
+      />
+      <button
+        type="submit"
+        className="bg-[#3A8F50] hover:bg-[#A3D977] text-white px-6 py-2 rounded-lg font-semibold transition-colors mt-2"
+        disabled={loading}
+      >
+        {loading ? "Logging in..." : "Login"}
+      </button>
+    </form>
   );
 }
 

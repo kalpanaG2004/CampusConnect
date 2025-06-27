@@ -30,7 +30,7 @@ function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-white px-6 py-8 flex flex-col items-center">
+    <div className="min-h-screen bg-white px-6 py-8 flex flex-col items-center pt-20">
       {/* Top Bar */}
       <div className="w-full max-w-4xl mb-8 flex justify-between items-center">
         <h1 className="text-2xl font-bold">
