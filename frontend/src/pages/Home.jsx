@@ -65,32 +65,33 @@ function Home() {
           backgroundImage: "url('/images/lawn.jpg')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          backgroundAttachment: 'fixed',
-          height: '100vh'
+          backgroundAttachment: 'fixed'
         }}
-        className="flex items-center justify-center relative"
+        className="flex items-center justify-center relative px-4 h-[100dvh] overflow-hidden pt-[5vh] md:pt-0"
       >
         {/* Translucent Overlay */}
         <div className="absolute inset-0 bg-[#DFFFE3]/10 backdrop-blur-xs"></div>
+
         {/* Cards Container */}
-        <div className="flex gap-12 flex-wrap justify-center items-center">
+        <div className="flex justify-center items-center gap-4 sm:gap-6 md:gap-12 flex-wrap max-w-[90%] mx-auto h-[90%] overflow-y-auto">
+
           {/* Welcome Card */}
           <motion.div
             layout
-            animate={{ x: activeCard === 'signup' || activeCard === 'login' ? -40 : 0 }}
+            animate={{ gap: activeCard !== 'welcome' ? '5%' : '0%' }}
             transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className="bg-white/1 backdrop-blur p-8 rounded-2xl text-center w-[400px] h-[240px] shadow flex flex-col justify-center"
+            className="bg-[#DFFFE3]/20 backdrop-blur p-6 md:p-8 rounded-2xl text-center w-full max-w-sm sm:max-w-md md:max-w-lg min-h-[220px] max-h-[90%] overflow-auto shadow flex flex-col justify-center"
           >
-            <h1 className="text-4xl text-[#2F3E2E] font-bold mb-3">
-              Welcome to Campus Connect
+            <h1 className="text-3xl md:text-4xl text-[#2F3E2E] font-bold mb-3">
+              Your feedback can shape LDCE — will you join?
             </h1>
-            <h2 className="text-lg text-gray-700 mb-3">Building a stronger LDCE community together.</h2>
+            <h2 className="text-md md:text-lg text-gray-700 mb-3">Your experiences can make a real difference with Campus Connect. Be the voice that counts.</h2>
             <div className="flex justify-center gap-4">
               <button
                 className="bg-[#3A8F50] hover:bg-[#A3D977] text-white px-6 py-2 rounded-lg font-semibold transition-colors"
                 onClick={() => setActiveCard('signup')}
               >
-                Join Us Now!
+                Signup Now!
               </button>
             </div>
           </motion.div>
@@ -104,9 +105,9 @@ function Home() {
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: -100, opacity: 0 }}
                 transition={{ duration: 0.5 }}
-                className="bg-white/1 backdrop-blur p-8 rounded-2xl text-center w-[400px] h-[440px] shadow flex flex-col justify-center"
+                className="bg-[#DFFFE3]/50 backdrop-blur p-6 md:p-8 rounded-2xl text-center w-[400px] h-[440px] shadow flex flex-col justify-center"
               >
-                <h2 className="text-3xl text-[#2F3E2E] font-bold mb-4">Sign Up</h2>
+                <h2 className="text-2xl md:text-3xl text-[#2F3E2E] font-bold mb-4">Sign Up</h2>
                 <Signup onSuccess={() => setActiveCard('login')} />
                 <p className="mt-4 text-sm">
                   Already registered?{' '}
@@ -127,9 +128,9 @@ function Home() {
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: -100, opacity: 0 }}
                 transition={{ duration: 0.5 }}
-                className="bg-white/1 backdrop-blur p-8 rounded-2xl text-center w-[400px] h-[440px] shadow flex flex-col justify-center"
+                className="bg-[#DFFFE3]/50 backdrop-blur p-6 md:p-8 rounded-2xl text-center w-[400px] h-[440px] shadow flex flex-col justify-center"
               >
-                <h2 className="text-3xl text-[#2F3E2E] font-bold mb-4">Login</h2>
+                <h2 className="text-2xl md:text-3xl text-[#2F3E2E] font-bold mb-4">Login</h2>
                 <Login />
                 <p className="mt-4 text-sm">
                   New here?{' '}
@@ -188,84 +189,86 @@ function Home() {
       </div>
 
       {/* Counters + Carousel Section */}
-      <div
-        ref={aboutRef}
-        className="w-full py-20 px-10 bg-[#DFFFE3] flex flex-col md:flex-row items-center justify-center md:px-60 gap-16"
-      >
-        {/* Animated Counters */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: 'easeOut', delay: 0.4 }}
-          className="flex flex-col gap-6 md:gap-8 w-full md:w-1/2 items-center md:items-start"
+      <div className="w-full py-20 px-4 bg-[#DFFFE3]">
+        <div
+          ref={aboutRef}
+          className="w-full max-w-[95%] md:max-w-[85%] lg:max-w-[75%] mx-auto flex flex-col md:flex-row items-center md:items-center justify-between gap-6"
         >
-          <div className="flex flex-col md:flex-row gap-8 flex-wrap items-center justify-center md:justify-start">
+          {/* Animated Counters */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, ease: 'easeOut', delay: 0.4 }}
+            className="flex flex-col gap-6 md:gap-8 w-full md:flex-1 items-center md:items-start"
+          >
+            <div className="flex flex-col md:flex-row gap-8 flex-wrap items-center justify-center md:justify-start">
 
-            {/* Total Feedbacks */}
-            <div className="text-center">
-              <h3 className="text-7xl font-bold text-[#3A8F50]">
-                {summary.total_feedbacks}+
-              </h3>
-              <p className="mt-2 text-2xl font-semibold text-gray-700">Feedbacks Submitted</p>
+              {/* Total Feedbacks */}
+              <div className="text-center">
+                <h3 className="text-7xl font-bold text-[#3A8F50]">
+                  {summary.total_feedbacks}+
+                </h3>
+                <p className="mt-2 text-2xl font-semibold text-gray-700">Feedbacks Submitted</p>
+              </div>
+
+              {/* Total Users */}
+              <div className="text-center">
+                <h3 className="text-7xl font-bold text-[#3A8F50]">
+                  {summary.total_users}+
+                </h3>
+                <p className="mt-2 text-2xl font-semibold text-gray-700">Active Users</p>
+              </div>
             </div>
 
-            {/* Total Users */}
-            <div className="text-center">
-              <h3 className="text-7xl font-bold text-[#3A8F50]">
-                {summary.total_users}+
-              </h3>
-              <p className="mt-2 text-2xl font-semibold text-gray-700">Active Users</p>
-            </div>
-          </div>
+            {/* Text Below Counters */}
+            <p className="text-center md:text-left text-gray-700 text-lg italic mt-4 max-w-xl">
+              Real voices. Real impact. Be the next one to speak up.
+            </p>
+          </motion.div>
 
-          {/* Text Below Counters */}
-          <p className="text-center md:text-left text-gray-700 text-lg italic mt-4 max-w-xl">
-            Real voices. Real impact. Be the next one to speak up.
-          </p>
-        </motion.div>
+          {/* Carousel */}
+          <div className="relative w-full md:flex-1 max-w-[90%] sm:max-w-[28rem] md:max-w-[36rem] lg:max-w-[44rem] bg-[#FAFAF5] backdrop-blur rounded-xl shadow hover:shadow-xl flex items-center justify-center p-4 sm:p-6 md:p-8 overflow-hidden max-h-[90%] min-h-[200px]">
+            {highlights.length > 0 && (
+              <motion.div
+                key={currentIndex}
+                onClick={() => navigate('/feedbacks')}
+                initial={{ x: 300, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: -300, opacity: 0 }}
+                transition={{ duration: 0.7, ease: 'easeInOut' }}
+                className="text-center overflow-y-auto max-h-[70vh]"
+              >
+                <h3 className="text-lg sm:text-xl font-semibold mb-2">{highlights[currentIndex].title}</h3>
+                <p className="text-lg sm:text-2xl font-bold italic text-gray-800 mb-4 line-clamp-4">“{highlights[currentIndex].comment}”</p>
+                <p className="text-sm mb-1">Rating: {highlights[currentIndex].rating} / 5</p>
+                {highlights[currentIndex].is_anonymous ? null : (
+                  <p className="text-sm">By {highlights[currentIndex].username}</p>
+                )}
+              </motion.div>
+            )}
 
-        {/* Carousel */}
-        <div className="relative w-full md:w-1/2 h-64 overflow-hidden bg-white/80 backdrop-blur rounded-xl shadow hover:shadow-xl flex items-center justify-center">
-          {highlights.length > 0 && (
-            <motion.div
-              key={currentIndex}
-              onClick={() => navigate('/feedbacks')}
-              initial={{ x: 300, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: -300, opacity: 0 }}
-              transition={{ duration: 0.7, ease: 'easeInOut' }}
-              className="text-center p-8"
+            {/* Manual Controls */}
+            <button
+              className="absolute left-4 text-2xl font-bold text-gray-600 hover:bg-[#3A8F50]/15 bg-[#DFFFE3]/40 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center shadow transition-colors"
+              onClick={() =>
+                setCurrentIndex((prevIndex) =>
+                  prevIndex === 0 ? highlights.length - 1 : prevIndex - 1
+                )
+              }
             >
-              <h3 className="text-xl font-semibold mb-2">{highlights[currentIndex].title}</h3>
-              <p className="text-2xl font-bold italic text-gray-800 mb-4 line-clamp-4">“{highlights[currentIndex].comment}”</p>
-              <p className="text-sm mb-1">Rating: {highlights[currentIndex].rating} / 5</p>
-              {highlights[currentIndex].is_anonymous ? null : (
-                <p className="text-sm">By {highlights[currentIndex].username}</p>
-              )}
-            </motion.div>
-          )}
-
-          {/* Manual Controls */}
-          <button
-            className="absolute left-4 text-2xl font-bold text-gray-600 hover:bg-[#3A8F50]/15 bg-[#DFFFE3]/40 w-10 h-10 rounded-full flex items-center justify-center shadow transition-colors"
-            onClick={() =>
-              setCurrentIndex((prevIndex) =>
-                prevIndex === 0 ? highlights.length - 1 : prevIndex - 1
-              )
-            }
-          >
-            ‹
-          </button>
-          <button
-            className="absolute right-4 text-2xl font-bold text-gray-600 hover:bg-[#3A8F50]/15 bg-[#DFFFE3]/40 w-10 h-10 rounded-full flex items-center justify-center shadow transition-colors"
-            onClick={() =>
-              setCurrentIndex((prevIndex) =>
-                (prevIndex + 1) % highlights.length
-              )
-            }
-          >
-            ›
-          </button>
+              ‹
+            </button>
+            <button
+              className="absolute right-4 text-2xl font-bold text-gray-600 hover:bg-[#3A8F50]/15 bg-[#DFFFE3]/40 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center shadow transition-colors"
+              onClick={() =>
+                setCurrentIndex((prevIndex) =>
+                  (prevIndex + 1) % highlights.length
+                )
+              }
+            >
+              ›
+            </button>
+          </div>
         </div>
       </div>
 
