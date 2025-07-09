@@ -105,7 +105,7 @@ function Home() {
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: -100, opacity: 0 }}
                 transition={{ duration: 0.5 }}
-                className="bg-[#DFFFE3]/50 backdrop-blur p-6 md:p-8 rounded-2xl text-center w-[400px] h-[440px] shadow flex flex-col justify-center"
+                className="bg-[#DFFFE3]/60 backdrop-blur p-6 md:p-8 rounded-2xl text-center w-[400px] h-[440px] shadow flex flex-col justify-center"
               >
                 <h2 className="text-2xl md:text-3xl text-[#2F3E2E] font-bold mb-4">Sign Up</h2>
                 <Signup onSuccess={() => setActiveCard('login')} />
@@ -128,7 +128,7 @@ function Home() {
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: -100, opacity: 0 }}
                 transition={{ duration: 0.5 }}
-                className="bg-[#DFFFE3]/50 backdrop-blur p-6 md:p-8 rounded-2xl text-center w-[400px] h-[440px] shadow flex flex-col justify-center"
+                className="bg-[#DFFFE3]/60 backdrop-blur p-6 md:p-8 rounded-2xl text-center w-[400px] h-[440px] shadow flex flex-col justify-center"
               >
                 <h2 className="text-2xl md:text-3xl text-[#2F3E2E] font-bold mb-4">Login</h2>
                 <Login />
@@ -148,11 +148,11 @@ function Home() {
       </div>
 
       {/* Teaser Cards Section */}
-      <div className="py-16 px-6 bg-[#8E9775] flex flex-col items-center justify-center">
-        <h2 className="text-4xl font-bold text-white mb-4 text-center max-w-4xl">
+      <div className="py-16 px-6 bg-[#c9e3b2] flex flex-col items-center justify-center">
+        <h2 className="text-4xl font-bold text-[#2F3E2E] mb-4 text-center max-w-4xl">
           Campus Connect gives you the space to share your voice across diverse categories.
         </h2>
-        <p className="text-lg text-center text-white mb-12 max-w-4xl">
+        <p className="text-lg text-center text-[#2F3E2E] mb-12 max-w-4xl">
           From faculty insights to campus events, club experiences to infrastructure feedback — your experiences matter and help shape our LDCE community.
         </p>
 
@@ -162,17 +162,17 @@ function Home() {
             <div
               key={index}
               onClick={() => navigate('/feedbacks')}
-              className={`flex flex-col md:flex-row items-center gap-6 bg-white/10 p-4 rounded-xl hover:shadow-md ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''
+              className={`flex flex-col md:flex-row items-center gap-6 bg-[#e2f1d4] p-4 rounded-xl hover:shadow-lg ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''
                 }`}
             >
               {/* Teaser Card */}
-              <div className="bg-white/90 p-6 rounded-xl shadow hover:shadow-lg transition-all transform hover:-translate-y-2 w-full md:w-1/2">
+              <div className="bg-[#FAFAF5] p-6 rounded-xl shadow hover:shadow-xl transition-all transform hover:-translate-y-2 w-full md:w-1/2">
                 <h3 className="text-lg font-semibold mb-2 text-[#2F3E2E]">{teaser.title}</h3>
                 <p className="text-gray-700 text-md italic line-clamp-4">“{teaser.comment}”</p>
               </div>
 
               {/* Mini Description on the Side */}
-              <p className="text-white text-md max-w-[300px] md:w-1/2">
+              <p className="text-[#374237] text-md max-w-[300px] md:w-1/2">
                 {categoryDescriptions[teaser.category]}
               </p>
             </div>
@@ -189,7 +189,7 @@ function Home() {
       </div>
 
       {/* Counters + Carousel Section */}
-      <div className="w-full py-20 px-4 bg-[#DFFFE3]">
+      <div className="w-full py-20 px-4 bg-[#c9e3b2]">
         <div
           ref={aboutRef}
           className="w-full max-w-[95%] md:max-w-[85%] lg:max-w-[75%] mx-auto flex flex-col md:flex-row items-center md:items-center justify-between gap-6"
@@ -273,7 +273,7 @@ function Home() {
       </div>
 
       {/* Pie Chart + Text + CTA Section */}
-      <div className="w-full py-20 px-10 bg-[#DFFFE3] flex flex-col md:flex-row items-center justify-center md:px-20 gap-16">
+      <div className="w-full py-20 px-10 bg-[#c9e3b2] flex flex-col md:flex-row items-center justify-center md:px-20 gap-16">
 
         {/* Pie Chart */}
         <div className="w-full md:w-1/2 flex justify-center">

@@ -6,9 +6,12 @@ import Dashboard from './pages/Dashboard';
 import NotFound from './pages/NotFound';
 import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
+import Footer from './components/Footer';
 import PublicFeedbacks from './pages/PublicFeedbacks';
 import MyFeedbacks from './pages/MyFeedbacks';
 import AllFeedbacks from './pages/AllFeedbacks';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfUse from './pages/TermsOfUse';
 
 function App() {
   return (
@@ -27,7 +30,11 @@ function App() {
         <Route path="/my-feedbacks" element={<MyFeedbacks />} />
         <Route path="/all-feedbacks" element={<AllFeedbacks />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-of-use" element={<TermsOfUse />} />
+
       </Routes>
+      <Footer />
     </div>
   );
 }
