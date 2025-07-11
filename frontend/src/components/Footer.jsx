@@ -4,6 +4,9 @@ function Footer() {
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
+
+    const currentYear = new Date().getFullYear();
+
     return (
         <footer
             style={{
@@ -71,7 +74,7 @@ function Footer() {
 
                 {/* Footer Credit */}
                 <div className="relative z-10 text-center text-xs md:text-sm font-light text-white">
-                    © 2025 Campus Connect | LDCE | Built with ❤️ by Kalpana Gupta
+                    © {currentYear} Campus Connect | LDCE | Built with ❤️ by Kalpana Gupta
                 </div>
             </div>
 

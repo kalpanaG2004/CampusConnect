@@ -1,7 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import NotFound from './pages/NotFound';
 import Navbar from './components/Navbar';
@@ -12,6 +10,7 @@ import MyFeedbacks from './pages/MyFeedbacks';
 import AllFeedbacks from './pages/AllFeedbacks';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfUse from './pages/TermsOfUse';
+import AuthPage from './pages/AuthPage';
 
 function App() {
   return (
@@ -20,8 +19,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/feedbacks" element={<PublicFeedbacks />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<AuthPage  />} />
+        <Route path="/signup" element={<AuthPage />} />
         <Route path="/dashboard" element={
           <ProtectedRoute>
             <Dashboard />

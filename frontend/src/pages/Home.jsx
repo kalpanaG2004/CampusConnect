@@ -105,14 +105,14 @@ function Home() {
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: -100, opacity: 0 }}
                 transition={{ duration: 0.5 }}
-                className="bg-[#DFFFE3]/60 backdrop-blur p-6 md:p-8 rounded-2xl text-center w-[400px] h-[440px] shadow flex flex-col justify-center"
+                className="bg-[#DFFFE3]/60 backdrop-blur p-6 md:p-8 rounded-2xl text-center w-[450px] max-h-[587px] overflow-y-auto shadow flex flex-col justify-start"
               >
                 <h2 className="text-2xl md:text-3xl text-[#2F3E2E] font-bold mb-4">Sign Up</h2>
                 <Signup onSuccess={() => setActiveCard('login')} />
                 <p className="mt-4 text-sm">
                   Already registered?{' '}
                   <span
-                    className="text-[#3A8F50] font-semibold cursor-pointer"
+                    className="text-[#3A8F50] font-semibold hover:underline cursor-pointer"
                     onClick={() => setActiveCard('login')}
                   >
                     Login
@@ -128,14 +128,14 @@ function Home() {
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: -100, opacity: 0 }}
                 transition={{ duration: 0.5 }}
-                className="bg-[#DFFFE3]/60 backdrop-blur p-6 md:p-8 rounded-2xl text-center w-[400px] h-[440px] shadow flex flex-col justify-center"
+                className="bg-[#DFFFE3]/60 backdrop-blur p-6 md:p-8 rounded-2xl text-center w-[450px] h-[440px] shadow flex flex-col justify-center"
               >
                 <h2 className="text-2xl md:text-3xl text-[#2F3E2E] font-bold mb-4">Login</h2>
                 <Login />
                 <p className="mt-4 text-sm">
                   New here?{' '}
                   <span
-                    className="text-[#3A8F50] font-semibold cursor-pointer"
+                    className="text-[#3A8F50] font-semibold hover:underline cursor-pointer"
                     onClick={() => setActiveCard('signup')}
                   >
                     Sign Up

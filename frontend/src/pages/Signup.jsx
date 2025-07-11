@@ -70,61 +70,69 @@ function Signup({ onSuccess }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-0 text-left">
+      <label htmlFor="email" className="block text-sm font-medium text-[#2F3E2E] mb-1">Email</label>
       <input
         type="email"
         name="email"
-        placeholder="Email"
+        placeholder="Enter your email"
         value={formData.email}
         onChange={handleChange}
-        className="p-2 rounded border"
+        className="p-2 rounded border mb-2"
         required
       />
+      <label htmlFor="username" className="block text-sm font-medium text-[#2F3E2E] mb-1">Username</label>
       <input
         type="text"
         name="username"
-        placeholder="Username"
+        placeholder="Enter your username"
         value={formData.username}
         onChange={handleChange}
-        className="p-2 rounded border"
+        className="p-2 rounded border mb-2"
         required
       />
+      <label htmlFor="password" className="block text-sm font-medium text-[#2F3E2E] mb-1">Password</label>
       <input
         type="password"
         name="password"
-        placeholder="Password"
+        placeholder="Enter the Password"
         value={formData.password}
         onChange={handleChange}
-        className="p-2 rounded border"
+        className="p-2 rounded border mb-2"
         required
       />
+      <label htmlFor="confirmPassword" className="block text-sm font-medium text-[#2F3E2E] mb-1">Confirm Password</label>
       <input
         type="password"
         name="confirmPassword"
-        placeholder="Confirm Password"
+        placeholder="Re-enter the Password"
         value={formData.confirmPassword}
         onChange={handleChange}
-        className="p-2 rounded border"
+        className="p-2 rounded border mb-2"
         required
       />
+      <label htmlFor="role" className="block text-sm font-medium text-[#2F3E2E] mb-1">Select your Role</label>
       <select
         name="role"
         value={formData.role}
         onChange={handleChange}
-        className="p-2 rounded border"
+        className="p-2 rounded border mb-2"
       >
         <option value="student">Student</option>
         <option value="admin">Admin</option>
       </select>
       {formData.role === "admin" && (
-        <input
-          type="password"
-          name="adminCode"
-          placeholder="Admin Code"
-          value={formData.adminCode}
-          onChange={handleChange}
-          className="p-2 rounded border"
-        />
+        <>
+          <label htmlFor="role" className="block text-sm font-medium text-[#2F3E2E] mb-1">Admin Code</label>
+          <input
+            type="password"
+            name="adminCode"
+            placeholder="Enter the Admin Code"
+            value={formData.adminCode}
+            onChange={handleChange}
+            className="p-2 rounded border mb-2"
+          />
+        </>
       )}
       <button
         type="submit"
