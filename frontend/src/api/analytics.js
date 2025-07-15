@@ -1,0 +1,35 @@
+export async function fetchHighlights() {
+    try {
+        const response = await fetch('http://localhost:8000/analytics/highlights');
+        if (!response.ok) throw new Error('Failed to fetch highlights');
+        const data = await response.json();
+        return data.highlights;
+    } catch (error) {
+        console.error('Error fetching highlights:', error);
+        return [];
+    }
+}
+
+export async function fetchSummary() {
+    try {
+        const response = await fetch('http://localhost:8000/analytics/summary');
+        if (!response.ok) throw new Error('Failed to fetch summary');
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching summary:', error);
+        return { total_feedbacks: 0, total_users: 0, category_counts: {} };
+    }
+}
+
+export async function fetchTeasers() {
+    try {
+        const response = await fetch('http://localhost:8000/analytics/teasers');
+        if (!response.ok) throw new Error('Failed to fetch teaser cards');
+        const data = await response.json();
+        return data.teasers;
+    } catch (error) {
+        console.error('Error fetching teasers:', error);
+        return [];
+    }
+}

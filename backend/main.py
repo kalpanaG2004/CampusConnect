@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routes import auth, submit_fb, view_fb, modify_fb, search_fb
+from routes import auth, submit_fb, view_fb, modify_fb, search_fb, analytics
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 
@@ -21,3 +21,4 @@ app.include_router(submit_fb.router)
 app.include_router(view_fb.router)
 app.include_router(modify_fb.router)
 app.include_router(search_fb.router)
+app.include_router(analytics.router)

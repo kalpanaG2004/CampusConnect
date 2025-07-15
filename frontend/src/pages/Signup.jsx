@@ -1,8 +1,6 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
-
-function Signup() {
+function Signup({ onSuccess }) {
   // Store form inputs
   const [formData, setFormData] = useState({
     email: '',
@@ -14,7 +12,6 @@ function Signup() {
   });
 
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
   // Handle input changes
   const handleChange = (e) => {
@@ -30,25 +27,10 @@ function Signup() {
     e.preventDefault();
 
     // FRONTEND VALIDATIONS
-    if (!formData.username.trim()) {
-      alert('Username is required');
-      return;
-    }
-
-    if (!formData.email.includes('@') || !formData.email.includes('.')) {
-      alert('Enter a valid email address');
-      return;
-    }
-
-    if (formData.password.length < 6) {
-      alert('Password must be at least 6 characters');
-      return;
-    }
-
-    if (formData.password !== formData.confirmPassword) {
-      alert('Passwords do not match');
-      return;
-    }
+    if (!formData.username.trim()) return alert('Username is required');
+    if (!formData.email.includes('@') || !formData.email.includes('.')) return alert('Enter a valid email address');
+    if (formData.password.length < 6) return alert('Password must be at least 6 characters');
+    if (formData.password !== formData.confirmPassword) return alert('Passwords do not match');
 
     const payload = {
       email: formData.email,
@@ -77,9 +59,7 @@ function Signup() {
         throw new Error(data.detail || "Registration failed");
       }
 
-      alert("Registration successful! Redirecting to login...");
-      navigate("/login");
-
+      onSuccess();
 
     } catch (error) {
       alert(error.message);
@@ -90,93 +70,78 @@ function Signup() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 bg-white p-6 rounded-lg shadow-md">
-      <h1 className="text-2xl font-bold mb-6 text-center">Signup</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
-
-        <div>
-          <label className="block text-gray-700">Email</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className="w-full border rounded px-3 py-2"
-            placeholder="Enter your email"
-            required
-          />
-        </div>
-
-        <div>
-          <label className="block text-gray-700">Username</label>
-          <input
-            type="text"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            className="w-full border rounded px-3 py-2"
-            placeholder="Enter a username"
-            required
-          />
-        </div>
-
-        <div>
-          <label className="block text-gray-700">Password</label>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-0 text-left">
+      <label htmlFor="email" className="block text-sm font-medium text-[#2F3E2E] mb-1">Email</label>
+      <input
+        type="email"
+        name="email"
+        placeholder="Enter your email"
+        value={formData.email}
+        onChange={handleChange}
+        className="p-2 rounded border mb-2"
+        required
+      />
+      <label htmlFor="username" className="block text-sm font-medium text-[#2F3E2E] mb-1">Username</label>
+      <input
+        type="text"
+        name="username"
+        placeholder="Enter your username"
+        value={formData.username}
+        onChange={handleChange}
+        className="p-2 rounded border mb-2"
+        required
+      />
+      <label htmlFor="password" className="block text-sm font-medium text-[#2F3E2E] mb-1">Password</label>
+      <input
+        type="password"
+        name="password"
+        placeholder="Enter the Password"
+        value={formData.password}
+        onChange={handleChange}
+        className="p-2 rounded border mb-2"
+        required
+      />
+      <label htmlFor="confirmPassword" className="block text-sm font-medium text-[#2F3E2E] mb-1">Confirm Password</label>
+      <input
+        type="password"
+        name="confirmPassword"
+        placeholder="Re-enter the Password"
+        value={formData.confirmPassword}
+        onChange={handleChange}
+        className="p-2 rounded border mb-2"
+        required
+      />
+      <label htmlFor="role" className="block text-sm font-medium text-[#2F3E2E] mb-1">Select your Role</label>
+      <select
+        name="role"
+        value={formData.role}
+        onChange={handleChange}
+        className="p-2 rounded border mb-2"
+      >
+        <option value="student">Student</option>
+        <option value="admin">Admin</option>
+      </select>
+      {formData.role === "admin" && (
+        <>
+          <label htmlFor="role" className="block text-sm font-medium text-[#2F3E2E] mb-1">Admin Code</label>
           <input
             type="password"
-            name="password"
-            value={formData.password}
+            name="adminCode"
+            placeholder="Enter the Admin Code"
+            value={formData.adminCode}
             onChange={handleChange}
-            className="w-full border rounded px-3 py-2"
-            placeholder="Enter password"
-            required
+            className="p-2 rounded border mb-2"
           />
-        </div>
-
-        <div>
-          <label className="block text-gray-700">Confirm Password</label>
-          <input
-            type="password"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            className="w-full border rounded px-3 py-2"
-            placeholder="Re-enter password"
-            required
-          />
-        </div>
-
-        <div>
-          <select
-            name="role"
-            value={formData.role}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border rounded"
-          >
-            <option value="student">Student</option>
-            <option value="admin">Admin</option>
-          </select>
-          {formData.role === "admin" && (
-            <input
-              name="adminCode"
-              type="password"
-              placeholder="Admin Code"
-              value={formData.adminCode}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded"
-            />
-          )}
-        </div>
-
-        <button
-          type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded"
-          disabled={loading}
-        >
-          {loading ? "Registering..." : "Signup"}
-        </button>
-      </form>
-    </div>
+        </>
+      )}
+      <button
+        type="submit"
+        className="bg-[#3A8F50] hover:bg-[#A3D977] text-white px-6 py-2 rounded-lg font-semibold transition-colors mt-2"
+        disabled={loading}
+      >
+        {loading ? "Registering..." : "Sign Up"}
+      </button>
+    </form>
   );
 }
 

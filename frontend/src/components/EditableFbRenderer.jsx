@@ -48,6 +48,8 @@ function EditableFbRenderer({
                                     type="number"
                                     value={editedFeedback.rating ?? ''}
                                     onChange={(e) => onChange('rating', parseInt(e.target.value))}
+                                    min={1}
+                                    max={5}
                                     className="block w-full mb-2 border rounded p-2"
                                 />
                                 <div className="mb-2">

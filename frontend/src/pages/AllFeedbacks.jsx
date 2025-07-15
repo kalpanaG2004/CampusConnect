@@ -39,7 +39,7 @@ function AllFeedbacks() {
   }, [token]);
 
   return (
-    <div className="max-w-5xl mx-auto p-6">
+    <div className="max-w-5xl mx-auto p-6 pt-20">
       <h1 className="text-3xl font-bold mb-6 text-center">All Feedbacks (Admin View) 🛠️</h1>
 
       <SearchAndFilter feedbacks={myFeedbacks} onFilter={setFiltered} />
