@@ -17,6 +17,8 @@ frontend/node_modules/
 .idx/
 .nix-profiler
 
+MIGRATION-SUMMARY.md
+
 # IDE
 .vscode/
 *.swp
