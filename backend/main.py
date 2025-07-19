@@ -10,7 +10,13 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://192.168.0.101:3000"],
+    allow_origins=[
+        "http://localhost:3000", 
+        "http://192.168.0.101:3000",
+        "https://*.googleusercontent.com",  # Firebase IDX preview URLs
+        "https://*.cloudworkstations.dev",  # Firebase IDX workspace URLs
+        "https://*.studio.firebase.google.com",  # Firebase Studio URLs
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
