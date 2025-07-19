@@ -1,5 +1,6 @@
 # Python
 backend/cenv/
+backend/.venv/
 __pycache__/
 *.pyc
 
@@ -11,3 +12,15 @@ frontend/node_modules/
 
 # Environment
 .env
+
+# Firebase IDX
+.idx/
+.nix-profiler
+
+MIGRATION-SUMMARY.md
+
+# IDE
+.vscode/
+*.swp
+*.swo
+*~

@@ -1,6 +1,8 @@
+import { apiRequest } from '../config/api.js';
+
 export async function fetchHighlights() {
     try {
-        const response = await fetch('http://localhost:8000/analytics/highlights');
+        const response = await apiRequest('/analytics/highlights');
         if (!response.ok) throw new Error('Failed to fetch highlights');
         const data = await response.json();
         return data.highlights;
@@ -12,7 +14,7 @@ export async function fetchHighlights() {
 
 export async function fetchSummary() {
     try {
-        const response = await fetch('http://localhost:8000/analytics/summary');
+        const response = await apiRequest('/analytics/summary');
         if (!response.ok) throw new Error('Failed to fetch summary');
         const data = await response.json();
         return data;
@@ -24,12 +26,12 @@ export async function fetchSummary() {
 
 export async function fetchTeasers() {
     try {
-        const response = await fetch('http://localhost:8000/analytics/teasers');
+        const response = await apiRequest('/analytics/teasers');
         if (!response.ok) throw new Error('Failed to fetch teaser cards');
         const data = await response.json();
         return data.teasers;
     } catch (error) {
-        console.error('Error fetching teasers:', error);
+        console.error('Error fetching teaser cards:', error);
         return [];
     }
 }
