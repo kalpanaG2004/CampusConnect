@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { apiRequest } from '../config/api.js';
 
 function Signup({ onSuccess }) {
   // Store form inputs
@@ -45,7 +46,7 @@ function Signup({ onSuccess }) {
 
     try {
       setLoading(true);
-      const res = await fetch('http://localhost:8000/register', {
+      const res = await apiRequest('/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
