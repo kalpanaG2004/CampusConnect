@@ -14,7 +14,8 @@ frontend/node_modules/
 .env
 
 # Firebase IDX
-.idx/
+.idx/*
+!.idx/dev.nix
 .nix-profiler
 
 MIGRATION-SUMMARY.md
