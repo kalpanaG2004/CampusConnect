@@ -8,6 +8,16 @@ load_dotenv()
 
 app = FastAPI()
 
+# Simple root endpoint for testing
+@app.get("/")
+async def root():
+    return {"message": "🚀 Campus Connect API is running!", "status": "healthy"}
+
+# Health check endpoint
+@app.get("/health")
+async def health():
+    return {"status": "ok", "database": "mock" if not hasattr('conn', 'admin') else "connected"}
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
