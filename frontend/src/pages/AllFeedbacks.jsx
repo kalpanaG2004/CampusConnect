@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { apiRequest } from '../config/api.js';
 import { useFeedbackEdit } from '../hooks/useFeedbackEdit';
 import SearchAndFilter from '../components/SearchAndFilter';
 import EditableFbRenderer from '../components/EditableFbRenderer';
@@ -17,7 +18,7 @@ function AllFeedbacks() {
 
     const fetchAllFeedbacks = async () => {
       try {
-        const res = await fetch('http://localhost:8000/admin/feedbacks', {
+                    const res = await apiRequest('/admin/feedbacks', {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
