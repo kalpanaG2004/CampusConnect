@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { API_BASE_URL } from '../config/api.js';
+import { apiRequest } from '../config/api.js';
 
 function FeedbackForm({ category }) {
     const [formData, setFormData] = useState({
@@ -28,7 +30,7 @@ function FeedbackForm({ category }) {
 
         try {
             setLoading(true);
-            const res = await fetch(`http://localhost:8000/feedback/${category}`, {
+            const res = await fetch(`${API_BASE_URL}/feedback/${category}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

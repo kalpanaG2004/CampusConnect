@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { API_BASE_URL } from '../config/api.js';
+import { apiRequest } from '../config/api.js';
 
 export function useFeedbackEdit(myFeedbacks, setMyFeedbacks) {
   const [editingId, setEditingId] = useState(null);
@@ -24,7 +26,7 @@ export function useFeedbackEdit(myFeedbacks, setMyFeedbacks) {
 
   const saveChanges = async () => {
     try {
-      const res = await fetch(`http://localhost:8000/feedbacks/${editingId}`, {
+      const res = await fetch(`${API_BASE_URL}/feedbacks/${editingId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -35,7 +37,7 @@ export function useFeedbackEdit(myFeedbacks, setMyFeedbacks) {
 
       if (!res.ok) throw new Error('Failed to update feedback');
 
-      const updatedRes = await fetch(`http://localhost:8000/feedbacks/${editingId}`, {
+      const updatedRes = await fetch(`${API_BASE_URL}/feedbacks/${editingId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -67,7 +69,7 @@ export function useFeedbackEdit(myFeedbacks, setMyFeedbacks) {
     if (!confirm) return;
 
     try {
-      const res = await fetch(`http://localhost:8000/feedbacks/${id}`, {
+      const res = await fetch(`${API_BASE_URL}/feedbacks/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,

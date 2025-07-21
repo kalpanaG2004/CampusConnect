@@ -1,4 +1,5 @@
 // API Configuration for Firebase IDX and local development
+import { API_BASE_URL } from '../config/api.js';
 const getApiBaseUrl = () => {
   // Check if we're running in Firebase IDX/Studio
   const hostname = window.location.hostname;
