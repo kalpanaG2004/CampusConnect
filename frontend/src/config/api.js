@@ -26,14 +26,29 @@ const API_BASE_URL = getBaseUrl();
 const apiRequest = async (endpoint, options = {}) => {
   const url = API_BASE_URL + endpoint;
   
-  return fetch(url, {
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json',
-      ...options.headers,
-    },
-    ...options,
-  });
+  try {
+    const response = await fetch(url, {
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        ...options.headers,
+      },
+      ...options,
+    });
+    
+    // Check if response is HTML (error page)
+    const contentType = response.headers.get('content-type');
+    if (contentType && contentType.includes('text/html')) {
+      const htmlText = await response.text();
+      console.error('Received HTML instead of JSON:', htmlText.substring(0, 200));
+      throw new Error(`API returned HTML instead of JSON. Status: ${response.status}`);
+    }
+    
+    return response;
+  } catch (error) {
+    console.error('API request failed:', error);
+    throw error;
+  }
 };
 
 export { API_BASE_URL, apiRequest };
