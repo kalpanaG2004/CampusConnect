@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import SearchAndFilter from '../components/SearchAndFilter';
 import FeedbackListRenderer from '../components/FeedbackListRenderer';
-import { apiRequest } from '../../config/api';
+import { apiRequest } from '../config/api';
 
 function PublicFeedbacks() {
     const [feedbacks, setFeedbacks] = useState([]);

@@ -1,4 +1,4 @@
-import { apiRequest } from "../../config/api";
+import { apiRequest } from "../config/api";
 
 export async function fetchHighlights() {
     try {

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { apiRequest } from '../../config/api';
+import { apiRequest } from '../config/api';
 
 function FeedbackForm({ category }) {
     const [formData, setFormData] = useState({

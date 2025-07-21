@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { apiRequest } from '../../config/api';
+import { apiRequest } from '../config/api';
 
 export function useFeedbackEdit(myFeedbacks, setMyFeedbacks) {
   const [editingId, setEditingId] = useState(null);
