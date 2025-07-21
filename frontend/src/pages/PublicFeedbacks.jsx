@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import SearchAndFilter from '../components/SearchAndFilter';
 import FeedbackListRenderer from '../components/FeedbackListRenderer';
+import { apiRequest } from '../../config/api';
 
 function PublicFeedbacks() {
     const [feedbacks, setFeedbacks] = useState([]);
@@ -10,7 +11,7 @@ function PublicFeedbacks() {
     useEffect(() => {
         const fetchFeedbacks = async () => {
             try {
-                const res = await fetch('http://localhost:8000/feedbacks');
+                const res = await apiRequest('/feedbacks');
                 if (!res.ok) throw new Error('Failed to load feedbacks');
                 const data = await res.json();
                 setFeedbacks(data);

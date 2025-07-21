@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { apiRequest } from '../../config/api';
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -31,7 +32,7 @@ function Login() {
       formBody.append("username", formData.email);
       formBody.append("password", formData.password);
 
-      const res = await fetch("http://localhost:8000/login", {
+      const res = await apiRequest("/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",

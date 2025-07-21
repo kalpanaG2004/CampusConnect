@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useFeedbackEdit } from '../hooks/useFeedbackEdit';
 import SearchAndFilter from '../components/SearchAndFilter';
 import EditableFbRenderer from '../components/EditableFbRenderer';
+import { apiRequest } from '../../config/api';
 
 function MyFeedbacks() {
     const [myFeedbacks, setMyFeedbacks] = useState([]);
@@ -22,7 +23,7 @@ function MyFeedbacks() {
     useEffect(() => {
         const fetchMyFeedbacks = async () => {
             try {
-                const res = await fetch('http://localhost:8000/my-feedbacks', {
+                const res = await apiRequest('/my-feedbacks', {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                     },
