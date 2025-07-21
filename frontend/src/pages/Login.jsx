@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { apiRequest } from '../config/api.js';
 import { useNavigate } from 'react-router-dom';
-import { API_BASE_URL } from '../config/api.js';
+import { apiRequest } from '../config/api.js';
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -33,12 +32,11 @@ function Login() {
       formBody.append("username", formData.email);
       formBody.append("password", formData.password);
 
-      const res = await fetch(`${API_BASE_URL}/login`, {
+      const res = await apiRequest('/login', {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
-        credentials: "include", // Important for Firebase IDX authentication
         body: formBody.toString(),
       });
 

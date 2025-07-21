@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { API_BASE_URL } from '../config/api.js';
 import { apiRequest } from '../config/api.js';
 
 function FeedbackForm({ category }) {
