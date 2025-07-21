@@ -1,5 +1,11 @@
 // Simple API configuration
 const getBaseUrl = () => {
+  // First, check for environment variable (for production/Render deployment)
+  if (process.env.REACT_APP_API_BASE_URL) {
+    return process.env.REACT_APP_API_BASE_URL;
+  }
+  
+  // Then check hostname for development environments
   const hostname = window.location.hostname;
   
   if (hostname.includes('cloudworkstations.dev') || 
@@ -11,6 +17,7 @@ const getBaseUrl = () => {
     return 'http://localhost:8000';
   }
   
+  // Fallback
   return 'http://localhost:8000';
 };
 
