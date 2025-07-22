@@ -1,4 +1,5 @@
 import { FaLinkedin, FaGithub, FaEnvelope, FaArrowUp } from 'react-icons/fa';
+import { Link } from "react-router-dom";
 
 function Footer() {
     const scrollToTop = () => {
@@ -28,9 +29,9 @@ function Footer() {
                     <div>
                         <h3 className="text-base md:text-lg font-bold mb-3 pb-1 border-b-2 border-white inline-block">Quick Links</h3>
                         <ul className="space-y-2">
-                            <li><a href="/" className="footer-link">Home</a></li>
-                            <li><a href="/feedbacks" className="footer-link">Feedbacks</a></li>
-                            <li><a href="/dashboard" className="footer-link">Dashboard</a></li>
+                            <li><Link to="/" className="footer-link">Home</Link></li>
+                            <li><Link to="/feedbacks" className="footer-link">Feedbacks</Link></li>
+                            <li><Link to="/dashboard" className="footer-link">Dashboard</Link></li>
                         </ul>
                     </div>
 
@@ -64,9 +65,9 @@ function Footer() {
                         <h3 className="text-base md:text-lg font-bold mb-3 pb-1 border-b-2 border-white inline-block">Resources</h3>
                         <ul className="space-y-2">
                             <li><a href="https://ldce.ac.in" target="_blank" rel="noopener noreferrer" className="footer-link">College Website</a></li>
-                            <li><a href="/documentation.pdf" target="_blank" className="footer-link">Project Documentation</a></li>
-                            <li><a href="/privacy-policy" className="footer-link">Privacy Policy</a></li>
-                            <li><a href="/terms-of-use" className="footer-link">Terms of Use</a></li>
+                            <li><Link to="/documentation.pdf" target="_blank" className="footer-link">Project Documentation</Link></li>
+                            <li><Link to="/privacy-policy" className="footer-link">Privacy Policy</Link></li>
+                            <li><Link to="/terms-of-use" className="footer-link">Terms of Use</Link></li>
                         </ul>
                     </div>
 
