@@ -11,7 +11,7 @@ function Footer() {
     return (
         <footer
             style={{
-                backgroundImage: "url('/images/footer.jpg')",
+                backgroundImage: `url('${process.env.PUBLIC_URL}/images/footer.jpg')`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'right',
                 backgroundAttachment: 'fixed'

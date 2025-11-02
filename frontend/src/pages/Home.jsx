@@ -62,7 +62,7 @@ function Home() {
       {/* 🌟 Fixed Background Section */}
       <div
         style={{
-          backgroundImage: "url('/images/lawn.jpg')",
+          backgroundImage: `url('${process.env.PUBLIC_URL}/images/lawn.jpg')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundAttachment: 'fixed'
