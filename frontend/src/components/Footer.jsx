@@ -1,5 +1,6 @@
 import { FaLinkedin, FaGithub, FaEnvelope, FaArrowUp } from 'react-icons/fa';
 import { Link } from "react-router-dom";
+import footerImage from '../assets/images/footer.jpg';
 
 function Footer() {
     const scrollToTop = () => {
@@ -11,7 +12,7 @@ function Footer() {
     return (
         <footer
             style={{
-                backgroundImage: `url('${process.env.PUBLIC_URL}/images/footer.jpg')`,
+                backgroundImage: `url(${footerImage})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'right',
                 backgroundAttachment: 'fixed'

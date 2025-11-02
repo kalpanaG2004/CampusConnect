@@ -5,6 +5,7 @@ import { motion, AnimatePresence, useInView } from 'framer-motion';
 import Signup from './Signup';
 import Login from './Login';
 import FeedbackPieChart from '../components/PieChart';
+import lawnImage from '../assets/images/lawn.jpg';
 
 function Home() {
   const navigate = useNavigate();
@@ -62,7 +63,7 @@ function Home() {
       {/* 🌟 Fixed Background Section */}
       <div
         style={{
-          backgroundImage: `url('${process.env.PUBLIC_URL}/images/lawn.jpg')`,
+          backgroundImage: `url(${lawnImage})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundAttachment: 'fixed'
