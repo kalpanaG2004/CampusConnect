@@ -1,23 +1,31 @@
+import { useState, useEffect } from 'react';
 import { FaLinkedin, FaGithub, FaEnvelope, FaArrowUp } from 'react-icons/fa';
 import { Link } from "react-router-dom";
-import footerImage from '../assets/images/footer.jpg';
 
 function Footer() {
+    const [footerImagePath, setFooterImagePath] = useState('/images/footer.jpg');
+
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     const currentYear = new Date().getFullYear();
 
+    // Set background image path dynamically to ensure it works in production
+    useEffect(() => {
+        const basePath = process.env.PUBLIC_URL || '';
+        setFooterImagePath(`${basePath}/images/footer.jpg`);
+    }, []);
+
     return (
         <footer
+            className="text-white py-8 px-10 md:px-20 relative overflow-hidden"
             style={{
-                backgroundImage: `url(${footerImage})`,
+                backgroundImage: `url(${footerImagePath})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'right',
                 backgroundAttachment: 'fixed'
             }}
-            className="text-white py-8 px-10 md:px-20 relative overflow-hidden"
         >
             {/* Overlay */}
             <div className="absolute inset-0 bg-[#2c3f2a]/50 backdrop-blur-xs z-0"></div>

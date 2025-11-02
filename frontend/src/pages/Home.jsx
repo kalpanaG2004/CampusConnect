@@ -5,7 +5,6 @@ import { motion, AnimatePresence, useInView } from 'framer-motion';
 import Signup from './Signup';
 import Login from './Login';
 import FeedbackPieChart from '../components/PieChart';
-import lawnImage from '../assets/images/lawn.jpg';
 
 function Home() {
   const navigate = useNavigate();
@@ -14,6 +13,7 @@ function Home() {
   const [teasers, setTeasers] = useState([]);
   const [activeCard, setActiveCard] = useState('welcome');
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [lawnImagePath, setLawnImagePath] = useState('/images/lawn.jpg');
 
   useEffect(() => {
     async function getAnalytics() {
@@ -31,6 +31,12 @@ function Home() {
       setTeasers(fetchedTeasers);
     }
     getTeasers();
+  }, []);
+
+  // Set background image path dynamically to ensure it works in production
+  useEffect(() => {
+    const basePath = process.env.PUBLIC_URL || '';
+    setLawnImagePath(`${basePath}/images/lawn.jpg`);
   }, []);
 
   // Auto-Rotation
@@ -62,13 +68,13 @@ function Home() {
     <div className="p-0 m-0">
       {/* 🌟 Fixed Background Section */}
       <div
+        className="flex items-center justify-center relative px-4 h-[100dvh] overflow-hidden pt-[5vh] md:pt-0"
         style={{
-          backgroundImage: `url(${lawnImage})`,
+          backgroundImage: `url(${lawnImagePath})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundAttachment: 'fixed'
         }}
-        className="flex items-center justify-center relative px-4 h-[100dvh] overflow-hidden pt-[5vh] md:pt-0"
       >
         {/* Translucent Overlay */}
         <div className="absolute inset-0 bg-[#DFFFE3]/10 backdrop-blur-xs"></div>
@@ -274,7 +280,7 @@ function Home() {
       </div>
 
       {/* Pie Chart + Text + CTA Section */}
-      <div className="w-full py-20 px-10 bg-[#c9e3b2] flex flex-col md:flex-row items-center justify-center md:px-20 gap-16">
+      <div className="w-full py-20 px-10 piechart-section-bg flex flex-col md:flex-row items-center justify-center md:px-20 gap-16">
 
         {/* Pie Chart */}
         <div className="w-full md:w-1/2 flex justify-center">

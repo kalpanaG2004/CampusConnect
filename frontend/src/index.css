@@ -11,3 +11,38 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Background images for production compatibility */
+.bg-lawn-image {
+  background-image: url('/images/lawn.jpg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-attachment: fixed !important;
+}
+
+.bg-footer-image {
+  background-image: url('/images/footer.jpg') !important;
+  background-size: cover !important;
+  background-position: right !important;
+  background-attachment: fixed !important;
+}
+
+/* Fallback using CSS variables for dynamic path resolution */
+.bg-lawn-image-dynamic {
+  background-image: var(--lawn-image, url('/images/lawn.jpg'));
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.bg-footer-image-dynamic {
+  background-image: var(--footer-image, url('/images/footer.jpg'));
+  background-size: cover;
+  background-position: right;
+  background-attachment: fixed;
+}
+
+/* PieChart section background */
+.piechart-section-bg {
+  background-color: #c9e3b2 !important;
+}
