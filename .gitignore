@@ -1,5 +1,5 @@
 # Python
-backend/cenv/
+backend/.venv/
 __pycache__/
 *.pyc
 
@@ -11,3 +11,7 @@ frontend/node_modules/
 
 # Environment
 .env
+
+../.idea/
+../backend/.idea/
+.idea
